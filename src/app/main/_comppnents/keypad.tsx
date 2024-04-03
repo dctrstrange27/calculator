@@ -6,16 +6,17 @@ import { Divide } from "lucide-react";
 
 type props = {
      setHandleInput:React.Dispatch<React.SetStateAction<string>>;
+     setCurrentExpression:React.Dispatch<React.SetStateAction<string>>;
      handleOperatorClick:(value:string)=>void
 }
 
-const KeypadNumber = ({setHandleInput,handleOperatorClick}:props) => {
+const KeypadNumber = ({setHandleInput,handleOperatorClick,setCurrentExpression}:props) => {
 
   const [randomArray, _] = useState<(number | string)[]>(RandomKeyPad);
 
   return (
-          <div className="flex  space-x-7 justify-center p-5">
-          <div className="grid grid-cols-3 gap-2  w-fit">
+          <div className="flex  space-x-5 justify-center ">
+          <div className="grid grid-cols-3  gap-4 w-fit">
              {randomArray.map((numbers) => (
                 <Button
                    onClick={(e) => {
@@ -24,7 +25,7 @@ const KeypadNumber = ({setHandleInput,handleOperatorClick}:props) => {
                    }}
                    key={numbers}
                    variant={"outline"}
-                   className="text-2xl rounded-full w-[70px] h-[70px]"
+                   className="text-2xl shadow-md rounded-full w-[60px] h-[60px]"
                 >
                    {numbers}
                 </Button>
@@ -33,6 +34,7 @@ const KeypadNumber = ({setHandleInput,handleOperatorClick}:props) => {
           <div className=" flex flex-col gap-2">
              <Button
                 onClick={() => {
+                   setCurrentExpression("")
                    setHandleInput("");
                 }}
                 className="text-xl rounded-full w-[50px] h-[50px]"
@@ -45,7 +47,7 @@ const KeypadNumber = ({setHandleInput,handleOperatorClick}:props) => {
                       onClick={() => {
                          handleOperatorClick(operators);
                       }}
-                      className="text-xl rounded-full w-[50px] h-[50px]"
+                      className="text-xl shadow-md rounded-full w-[50px] h-[50px]"
                    >
                       {operators === "*" ? "x" : operators && operators == "/" ? <Divide></Divide> :operators }
                    </Button>
